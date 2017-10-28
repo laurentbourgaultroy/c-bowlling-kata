@@ -7,3 +7,5 @@ computation using recursive algorithm that I find rather elegant.
 
 Simply clone the git repo and `make` inside the project. You only need gcc
 installed, no external library are required.
+
+I release this work in the public domain, do with it as you want :)
