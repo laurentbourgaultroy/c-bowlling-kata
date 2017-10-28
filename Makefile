@@ -1,10 +1,13 @@
-CFLAGS=-Wall
+CFLAGS=-g -Wall
 
-.PHONY: test
+.PHONY: test clean
 
-all: test
-	@bin/test
+all: bin/test
+	@valgrind $^
 
-test: bowling_test.c bowling.c
+clean:
+	rm -rf bin/*
+
+bin/test: bowling_test.c bowling.c
 	@mkdir -p bin
-	@gcc $(CFLAGS) -o bin/$@ $^
+	@gcc $(CFLAGS) -o $@ $^
