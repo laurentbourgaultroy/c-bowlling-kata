@@ -76,12 +76,27 @@ void test_all_spare_game()
     bowling_score(game_rolls));
 }
 
+void test_single_strike()
+{
+  reset_rolls(game_rolls);
+  game_rolls[0] = 10;
+  game_rolls[1] = 4;
+  game_rolls[2] = 3;
+  roll_many(&game_rolls[3], 0, 16);
+
+  assert_equals(
+    "single strike game",
+    24,
+    bowling_score(game_rolls));
+}
+
 int main(int argc, char** argv)
 {
   test_all_gutter_is_zero_score();
   test_single_pin_per_rolls();
   test_one_spare_game();
   test_all_spare_game();
+  test_single_strike();
 
   if (test_status == 0)
   {

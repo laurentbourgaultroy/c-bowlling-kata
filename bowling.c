@@ -16,6 +16,12 @@ int is_spare(int *rolls)
   return 0;
 }
 
+int is_strike(int *rolls)
+{
+  if (rolls[0] == 10) return 1;
+  return 0;
+}
+
 int sum(int *rolls, int max)
 {
   int result = 0;
@@ -28,7 +34,15 @@ int sum(int *rolls, int max)
 
 int bowling_score(int *rolls)
 {
-  if (is_last_frame(rolls)) return sum(rolls, 3);
+  if (is_last_frame(rolls))
+  {
+    return sum(rolls, 3);
+  }
+
+  if (is_strike(rolls))
+  {
+    return sum(rolls, 3) + bowling_score(&rolls[1]);
+  }
 
   if (is_spare(rolls)) {
     return sum(rolls, 3) + bowling_score(&rolls[2]);
