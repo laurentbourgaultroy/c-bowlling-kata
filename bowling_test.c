@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <check.h>
 #include "bowling.h"
 
 static int test_status = 0;
@@ -7,25 +6,24 @@ static int game_rolls[22];
 
 void reset_rolls(int *rolls)
 {
-  for (int i = 0; i < 22; i++)
-  {
-    rolls[i] = END_OF_ROLLS;
-  }
+  for (int i = 0; i < 22; i++) rolls[i] = END_OF_ROLLS;
 }
 
 void roll_many(int *rolls, int pins, int count)
 {
-  for (int i = 0; i < count; i++)
-  {
-    rolls[i] = pins;
-  }
+  for (int i = 0; i < count; i++) rolls[i] = pins;
 }
 
 void assert_equals(char *message, int expected, int actual)
 {
   if (expected == actual) return;
 
-  printf("ERROR: %s, expected %d but got %d\n", message, expected, actual);
+  printf(
+    "ERROR: %s, expected %d but got %d\n",
+    message,
+    expected,
+    actual);
+
   test_status = -1;
 }
 
@@ -110,10 +108,7 @@ int main(int argc, char** argv)
   test_single_strike();
   test_all_strike_game();
 
-  if (test_status == 0)
-  {
-    printf("OK\n");
-  }
+  if (test_status == 0) puts("OK");
 
   return test_status;
 }
