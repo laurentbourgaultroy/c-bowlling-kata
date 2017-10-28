@@ -90,6 +90,17 @@ void test_single_strike()
     bowling_score(game_rolls));
 }
 
+void test_all_strike_game()
+{
+  reset_rolls(game_rolls);
+  roll_many(game_rolls, 10, 12);
+
+  assert_equals(
+    "all spare game",
+    300,
+    bowling_score(game_rolls));
+}
+
 int main(int argc, char** argv)
 {
   test_all_gutter_is_zero_score();
@@ -97,6 +108,7 @@ int main(int argc, char** argv)
   test_one_spare_game();
   test_all_spare_game();
   test_single_strike();
+  test_all_strike_game();
 
   if (test_status == 0)
   {
