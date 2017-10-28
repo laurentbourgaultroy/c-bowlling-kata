@@ -34,10 +34,10 @@ void test_all_gutter_is_zero_score()
   reset_rolls(game_rolls);
   roll_many(game_rolls, 0, 20);
 
-  assert_equals("reset score", NO_ROLL, game_rolls[21]);
-  int score = bowling_score(game_rolls);
-
-  assert_equals("all gutter game", 0, score);
+  assert_equals(
+    "all gutter game",
+    0,
+    bowling_score(game_rolls));
 }
 
 void test_single_pin_per_rolls()
@@ -45,14 +45,48 @@ void test_single_pin_per_rolls()
   reset_rolls(game_rolls);
   roll_many(game_rolls, 1, 20);
 
-  int score = bowling_score(game_rolls);
+  assert_equals(
+    "all gutter game",
+    20,
+    bowling_score(game_rolls));
+}
 
-  assert_equals("single pin per roll game", 20, score);
+void test_one_spare_game()
+{
+  reset_rolls(game_rolls);
+  game_rolls[0] = 4;
+  game_rolls[1] = 6;
+  game_rolls[2] = 3;
+  roll_many(&game_rolls[3], 0, 17);
+
+  assert_equals(
+    "single spare game",
+    16,
+    bowling_score(game_rolls));
+}
+
+void test_all_spare_game()
+{
+  reset_rolls(game_rolls);
+  roll_many(game_rolls, 5, 21);
+
+  assert_equals(
+    "all spare game",
+    150,
+    bowling_score(game_rolls));
 }
 
 int main(int argc, char** argv)
 {
   test_all_gutter_is_zero_score();
   test_single_pin_per_rolls();
+  test_one_spare_game();
+  test_all_spare_game();
+
+  if (test_status == 0)
+  {
+    printf("OK\n");
+  }
+
   return test_status;
 }

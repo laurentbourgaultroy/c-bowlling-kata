@@ -1,17 +1,38 @@
 #include <stdio.h>
 #include "bowling.h"
 
-int bowling_score(int *rolls)
-{
-  int score = 0;
-  int *current_roll;
-
-  current_roll = rolls;
-  while(*current_roll != NO_ROLL)
+int is_last_frame(int *rolls) {
+  for (int i = 0; i < 4; i++)
   {
-    score += *current_roll;
-    current_roll++;
+    if (rolls[i] == NO_ROLL) return 1;
   }
 
-  return score;
+  return 0;
+}
+
+int is_spare(int *rolls)
+{
+  if(rolls[0] + rolls[1] == 10) return 1;
+  return 0;
+}
+
+int sum(int *rolls, int max)
+{
+  int result = 0;
+  for (int i = 0; i < max; i++) {
+    if (rolls[i] == NO_ROLL) return result;
+    result += rolls[i];
+  };
+  return result;
+}
+
+int bowling_score(int *rolls)
+{
+  if (is_last_frame(rolls)) return sum(rolls, 3);
+
+  if (is_spare(rolls)) {
+    return sum(rolls, 3) + bowling_score(&rolls[2]);
+  }
+
+  return sum(rolls, 2) + bowling_score(&rolls[2]);
 }

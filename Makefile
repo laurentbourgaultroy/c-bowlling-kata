@@ -7,4 +7,4 @@ all: test
 
 test: bowling_test.c bowling.c
 	@mkdir -p bin
-	gcc $(CFLAGS) -o bin/$@ $^
+	@gcc $(CFLAGS) -o bin/$@ $^
