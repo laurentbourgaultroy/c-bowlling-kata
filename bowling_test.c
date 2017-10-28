@@ -9,7 +9,7 @@ void reset_rolls(int *rolls)
 {
   for (int i = 0; i < 22; i++)
   {
-    rolls[i] = NO_ROLL;
+    rolls[i] = END_OF_ROLLS;
   }
 }
 

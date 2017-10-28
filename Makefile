@@ -3,7 +3,7 @@ CFLAGS=-g -Wall
 .PHONY: test clean
 
 all: bin/test
-	@valgrind $^
+	@$^
 
 clean:
 	rm -rf bin/*

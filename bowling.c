@@ -6,7 +6,7 @@
 int is_last_frame(int *rolls) {
   for (int i = 0; i < 4; i++)
   {
-    if (rolls[i] == NO_ROLL) return 1;
+    if (rolls[i] == END_OF_ROLLS) return 1;
   }
 
   return 0;
@@ -29,7 +29,7 @@ int sum(int *rolls, int max)
   int result = 0;
   for (int i = 0; i < max; i++)
   {
-    if (rolls[i] == NO_ROLL) return result;
+    if (rolls[i] == END_OF_ROLLS) return result;
     result += rolls[i];
   };
   return result;
